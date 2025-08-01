@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Server version="8">
+	<Name>ORIGIN</Name>
+	<Type>origin</Type>
+	<IP>*</IP>
+	<PrivacyProtection>false</PrivacyProtection>
+	<StunServer>stun.l.google.com:19302</StunServer>
+
+	<Modules>
+		<HTTP2>
+			<Enable>true</Enable>
+		</HTTP2>
+
+		<LLHLS>
+			<Enable>true</Enable>
+		</LLHLS>
+
+		<P2P>
+			<Enable>false</Enable>
+			<MaxClientPeersPerHostPeer>2</MaxClientPeersPerHostPeer>
+		</P2P>
+
+	</Modules>
+
+	<Bind>
+
+		<Managers>
+			<API>
+				<Port>8081</Port>
+				<TLSPort>8082</TLSPort>
+				<WorkerCount>1</WorkerCount>
+			</API>
+		</Managers>
+	
+		<Providers>
+			<WebRTC>
+				<Signalling>
+					<Port>3333</Port>
+					<TLSPort>3334</TLSPort>
+					<WorkerCount>2</WorkerCount>
+				</Signalling>
+				<IceCandidates>
+					<IceCandidate>${env:PublicIP:*}:10000-10004/udp</IceCandidate>
+					<TcpRelay>${env:PublicIP:*}:3478</TcpRelay>
+					<TcpForce>true</TcpForce>
+					<TcpRelayWorkerCount>1</TcpRelayWorkerCount>
+				</IceCandidates>
+			</WebRTC>
+			<RTMP>
+				<Port>1935</Port>
+			</RTMP>
+			<SRT>
+				<Port>9999</Port>
+				<WorkerCount>1</WorkerCount>
+			</SRT>
+		</Providers>
+
+		<Publishers>
+			<OVT>
+				<Port>9000</Port>
+				<WorkerCount>3</WorkerCount>
+			</OVT>
+
+			<Thumbnail>
+				<Port>20080</Port>
+				<TLSPort>20081</TLSPort>
+			</Thumbnail>
+		</Publishers>
+
+	</Bind>
+
+	<Managers>
+		<Host>
+			<Names>
+				<Name>${env:OME_HOST_IP:*}</Name>
+			</Names>
+			<TLS>
+				<CertPath>/opt/ovenmediaengine/bin/origin_conf/cert.crt</CertPath>
+				<KeyPath>/opt/ovenmediaengine/bin/origin_conf/cert.key</KeyPath>
+				<ChainCertPath>/opt/ovenmediaengine/bin/origin_conf/cert.ca-bundle</ChainCertPath>
+			</TLS>
+		</Host>
+		<API>
+			<AccessToken>${env:OME_API_ACCESS_TOKEN}</AccessToken>
+			<CrossDomains>
+				<Url>*</Url>
+			</CrossDomains>
+		</API>
+	</Managers>
+
+</Server>
