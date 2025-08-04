@@ -200,13 +200,13 @@
                                                                 <Url>*</Url>
                                                         </CrossDomains>
 							<DVR>
-								<Enable>false</Enable>
-							 	<TempStoragePath>/tmp/ome_dvr/</TempStoragePath>
-        							<MaxDuration>300</MaxDuration>
-	    						</DVR>
+                                                                <Enable>false</Enable>
+                                                                <TempStoragePath>/tmp/ome_dvr/</TempStoragePath>
+                                                                <MaxDuration>300</MaxDuration>
+                                                        </DVR>
                                                 </LLHLS>
-						<!--<Thumbnail>
-						</Thumbnail>-->
+						<Thumbnail>
+						</Thumbnail>
                                         </Publishers>
                                 </Application>
                         </Applications>
