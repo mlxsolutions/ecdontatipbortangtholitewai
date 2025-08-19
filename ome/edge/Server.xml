@@ -120,6 +120,8 @@
                                         <Pass>
                                                 <Scheme>ovt</Scheme>
                                                 <Urls>
+                                                        <Url>live-c2-60-bhs5-origin.muselink.com:9000/</Url>
+                                                        <Url>live-c2-60-uk1-origin.muselink.com:9000/</Url>
 							<Url>live-ca-central.muselink.com:9000/</Url>
 							<Url>live-ca-east-origin.muselink.com:9000/</Url>
 							<Url>live-eu-west-1-origin.muselink.com:9000/</Url>
