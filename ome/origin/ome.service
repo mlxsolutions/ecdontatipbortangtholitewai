@@ -6,7 +6,7 @@ Requires=docker.service
 [Service]
 Type=oneshot
 RemainAfterExit=true
-Environment=OME_HOST_IP=$DOMAIN
+Environment=OME_HOST_IP=$OME_HOST_IP
 Environment=OME_DOCKER_HOME=$OME_DOCKER_HOME
 ExecStart=$OME_DOCKER_HOME/ome-startd.sh
 TimeoutStartSec=0 
