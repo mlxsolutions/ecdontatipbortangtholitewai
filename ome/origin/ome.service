@@ -1,0 +1,15 @@
+[Unit]
+Description=Start OvenMediaEngine Docker container
+After=network.target docker.service
+Requires=docker.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=true
+Environment=OME_HOST_IP=$DOMAIN
+Environment=OME_DOCKER_HOME=$OME_DOCKER_HOME
+ExecStart=$OME_DOCKER_HOME/ome-startd.sh
+TimeoutStartSec=0 
+
+[Install]
+WantedBy=multi-user.target
