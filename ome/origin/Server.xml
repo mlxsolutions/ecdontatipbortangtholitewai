@@ -28,7 +28,7 @@
 			<WebRTC>
 				<Signalling>
 					<TLSPort>3334</TLSPort>
-					<WorkerCount>2</WorkerCount>
+					<WorkerCount>${env:WEBRTC_SIGNALLING_WORKER_COUNT:2}</WorkerCount>
 				</Signalling>
 				<IceCandidates>
 					<IceCandidate>${env:PUBLIC_IPV4:*}:10000-10002/udp</IceCandidate>
@@ -48,7 +48,7 @@
 		<Publishers>
 			<OVT>
 				<Port>9000</Port>
-				<WorkerCount>3</WorkerCount>
+				<WorkerCount>${env:OVT_WORKER_COUNT:3}</WorkerCount>
 			</OVT>
 			<Thumbnail>
 				<TLSPort>20081</TLSPort>
@@ -58,7 +58,7 @@
 	<Managers>
 		<Host>
 			<Names>
-				<Name>$DOMAIN</Name>
+				<Name>${env:OME_HOST_IP}</Name>
 			</Names>
 			<TLS>
 				<CertPath>/opt/ovenmediaengine/bin/origin_conf/cert.crt</CertPath>

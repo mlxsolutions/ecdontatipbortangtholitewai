@@ -4,9 +4,13 @@ docker stop ome
 docker rm ome
 docker run -d --name ome \
   -e OME_HOST_IP="$OME_HOST_IP" \
-  -v "$OME_DOCKER_HOME/conf":/opt/ovenmediaengine/bin/origin_conf \
-  -v "$OME_DOCKER_HOME/logs":/var/log/ovenmediaengine \
-  -v "$OME_DOCKER_HOME/rec":/mnt/record \
+  -e PUBLIC_IPV4="$PUBLIC_IPV4" \
+  -e API_ACCESS_TOKEN="$API_ACCESS_TOKEN" \
+  -e OVT_WORKER_COUNT="$OVT_WORKER_COUNT" \
+  -e WEBRTC_SIGNALLING_WORKER_COUNT="$WEBRTC_SIGNALLING_WORKER_COUNT" \
+  -v "$OME_DOCKER_HOST/conf":/opt/ovenmediaengine/bin/origin_conf \
+  -v "$OME_DOCKER_HOST/logs":/var/log/ovenmediaengine \
+  -v "$OME_DOCKER_HOST/rec":/mnt/record \
   -p 1935:1935 \
   -p 9999:9999/udp \
   -p 9000:9000 \
