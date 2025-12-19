@@ -31,8 +31,8 @@
 					<WorkerCount>2</WorkerCount>
 				</Signalling>
 				<IceCandidates>
-					<IceCandidate>*:10000-10002/udp</IceCandidate>
-					<TcpRelay>*:3478</TcpRelay>
+					<IceCandidate>${env:PUBLIC_IPV4:*}:10000-10002/udp</IceCandidate>
+					<TcpRelay>${env:PUBLIC_IPV4:*}:3478</TcpRelay>
 					<TcpForce>true</TcpForce>
 					<TcpRelayWorkerCount>1</TcpRelayWorkerCount>
 				</IceCandidates>
@@ -67,7 +67,7 @@
 			</TLS>
 		</Host>
 		<API>
-			<AccessToken>$API_ACCESS_TOKEN</AccessToken>
+			<AccessToken>${env:API_ACCESS_TOKEN}</AccessToken>
 			<CrossDomains>
 				<Url>*</Url>
 			</CrossDomains>
