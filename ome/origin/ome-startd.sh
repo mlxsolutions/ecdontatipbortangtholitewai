@@ -1,6 +1,5 @@
 #!/bin/bash
 
-OME_DOCKER_HOME="/opt/ovenmediaengine"
 docker stop ome
 docker rm ome
 docker run -d --name ome \
