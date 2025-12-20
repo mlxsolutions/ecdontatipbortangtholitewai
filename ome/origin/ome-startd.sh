@@ -23,6 +23,8 @@ echo "🚀 Launching OvenMediaEngine..."
 # docker run -d --name ome --restart unless-stopped \
 docker run -d --name ome \
   -e OME_HOST_IP="$OME_HOST_IP" \
+  -e PUBLIC_IPV4="$PUBLIC_IPV4" \
+  -e API_ACCESS_TOKEN="$API_ACCESS_TOKEN" \
   -v "$OME_DOCKER_HOME/conf":/opt/ovenmediaengine/bin/origin_conf \
   -v "$OME_DOCKER_HOME/logs":/var/log/ovenmediaengine \
   -v "$OME_DOCKER_HOME/rec":/mnt/record \

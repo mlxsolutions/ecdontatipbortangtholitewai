@@ -6,10 +6,11 @@ Requires=docker.service
 [Service]
 Type=oneshot
 RemainAfterExit=true
-Environment=OME_HOST_IP=live-ca-rise2-origin.muselink.com
-Environment=OME_DOCKER_HOME=/opt/ovenmediaengine
 ExecStart=/opt/ovenmediaengine/ome-startd.sh
 TimeoutStartSec=0 
 
 [Install]
 WantedBy=multi-user.target
+
+# Environment=OME_HOST_IP=live-ca-rise2-origin.muselink.com
+# Environment=OME_DOCKER_HOME=/opt/ovenmediaengine

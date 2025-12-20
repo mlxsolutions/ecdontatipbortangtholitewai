@@ -1,0 +1,35 @@
+[Unit]
+Description=OME Record Worker Daemon
+After=network.target
+StartLimitIntervalSec=0
+
+#[Service]
+#Type=simple
+#User=ubuntu
+#Group=ubuntu
+
+[Service]
+User=root
+Group=root
+
+# Path to your script
+ExecStart=/opt/ovenmediaengine/ome-record-worker.sh
+
+# Environment variables needed by your script
+Environment=OME_DOCKER_HOME=/opt/ovenmediaengine
+
+# Restart if it crashes
+Restart=always
+RestartSec=5
+
+# Ensure logs go into your LOG_FILE, not systemd logs
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
+
+
+# sudo nano /etc/systemd/system/ome-record-worker.service
+# sudo systemctl daemon-reload
+# sudo systemctl enable --now ome-record-worker.service
