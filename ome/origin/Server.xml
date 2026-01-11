@@ -39,8 +39,8 @@
                                         <WorkerCount>2</WorkerCount>
                                 </Signalling>
                                 <IceCandidates>
-                                        <IceCandidate>${env:PUBLIC_IPV4:*}:10000-10002/udp</IceCandidate>
-                                        <TcpRelay>${env:PUBLIC_IPV4:*}:3478</TcpRelay>
+                                        <IceCandidate>${env:PublicIP:*}:10000-10002/udp</IceCandidate>
+                                        <TcpRelay>${env:PublicIP:*}:3478</TcpRelay>
                                         <TcpForce>true</TcpForce>
                                         <TcpRelayWorkerCount>1</TcpRelayWorkerCount>
                                 </IceCandidates>
