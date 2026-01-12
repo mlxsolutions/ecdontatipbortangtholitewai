@@ -37,7 +37,6 @@ docker run -d --name ome \
   -p 3478:3478 \
   -p 8082:8082 \
   -p 6379:6379 \
-  -p 20081:20081 \
   -p 10000-10002:10000-10002/udp \
   airensoft/ovenmediaengine:latest
 
