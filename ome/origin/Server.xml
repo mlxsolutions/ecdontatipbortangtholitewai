@@ -4,8 +4,10 @@
         <Type>origin</Type>
         <IP>*</IP>
         <PrivacyProtection>false</PrivacyProtection>
-        <StunServer>stun.ovenmediaengine.com:13478</StunServer>
+        <StunServer>stun.cloudflare.com:3478</StunServer>
+        <!--<StunServer>stun.ovenmediaengine.com:13478</StunServer>-->
         <!--<StunServer>stun.l.google.com:19302</StunServer>-->
+        
 
         <Modules>
                 <HTTP2>

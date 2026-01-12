@@ -4,8 +4,7 @@
         <Type>edge</Type>
         <IP>*</IP>
         <PrivacyProtection>false</PrivacyProtection>
-        <!--<StunServer>stun.l.google.com:19302</StunServer>-->
-	<StunServer>stun.ovenmediaengine.com:13478</StunServer>
+        <StunServer>stun.cloudflare.com:3478</StunServer>
         <Modules>
                 <HTTP2>
                         <Enable>true</Enable>
@@ -16,9 +15,7 @@
                 <DynamicAppRemoval>
                         <Enable>false</Enable>
                 </DynamicAppRemoval>
-                <!-- P2P works only in WebRTC and is experiment feature -->
                 <P2P>
-                        <!-- disabled by default -->
                         <Enable>false</Enable>
                         <MaxClientPeersPerHostPeer>2</MaxClientPeersPerHostPeer>
                 </P2P>
@@ -28,7 +25,7 @@
         <Bind>
                 <Providers>
                         <OVT>
-                                <WorkerCount>2</WorkerCount>
+                                <WorkerCount>3</WorkerCount>
                         </OVT>
                 </Providers>
 
@@ -39,7 +36,7 @@
                                         <WorkerCount>2</WorkerCount>
                                 </Signalling>
                                 <IceCandidates>
-                                        <IceCandidate>${env:PublicIP:*}:10000-10002/udp</IceCandidate>
+                                        <IceCandidate>${env:PublicIP:*}:10000-10009/udp</IceCandidate>
                                         <TcpRelay>${env:PublicIP:*}:3478</TcpRelay>
                                         <TcpForce>true</TcpForce>
                                         <TcpRelayWorkerCount>1</TcpRelayWorkerCount>
@@ -47,10 +44,14 @@
                         </WebRTC>
 
 			<LLHLS>
-				<TLSPort>${env:OME_LLHLS_STREAM_TLS_PORT:4334}</TLSPort>
-				<WorkerCount>3</WorkerCount>
+				<TLSPort>4334</TLSPort>
+				<WorkerCount>2</WorkerCount>
 			</LLHLS>
-		 </Publishers>
+                        <HLS>
+                                <TLSPort>13334</TLSPort>
+                                <WorkerCount>1</WorkerCount>
+                        </HLS>
+		</Publishers>
 
 		<Managers>
 			<API>
@@ -73,10 +74,10 @@
 			</TLS>
 		</Host>
 		<API>
-            <AccessToken>${env:API_ACCESS_TOKEN:}</AccessToken>
-            <CrossDomains>
-                    <Url>*</Url>
-            </CrossDomains>
+                <AccessToken>${env:API_ACCESS_TOKEN:}</AccessToken>
+                <CrossDomains>
+                        <Url>*</Url>
+                </CrossDomains>
         </API>
 	</Managers>
 
@@ -116,8 +117,7 @@
                                         <Pass>
                                                 <Scheme>ovt</Scheme>
                                                 <Urls>
-                                                    <Url>live-ca-rise2-origin.muselink.com:9000/</Url>
-                                                    <Url>live-ca-rise2-02-origin.muselink.com:9000/</Url>
+                                                        <Url>live-ca-rise2-origin.muselink.com:9000/</Url>
                                                 </Urls>
                                                 <ForwardQueryParams>true</ForwardQueryParams>
                                         </Pass>
@@ -161,30 +161,30 @@
                                                         <CreateDefaultPlaylist>false</CreateDefaultPlaylist>
                                                 </WebRTC>
                                                 <LLHLS>
-                                                    <ChunkDuration>1</ChunkDuration>
-                                                    <SegmentDuration>6</SegmentDuration>
-                                                    <SegmentCount>12</SegmentCount>
-                                                    <CrossDomains>
-                                                            <Url>*</Url>
-                                                    </CrossDomains>
-                                                    <DVR>
-                                                        <Enable>false</Enable>
-                                                        <TempStoragePath>/tmp/ome_dvr/</TempStoragePath>
-                                                        <MaxDuration>300</MaxDuration>
-                                                    </DVR>
-                                                </LLHLS>
-                                                <HLS>
-                                                    <SegmentCount>12</SegmentCount>
+                                                        <ChunkDuration>0.5</ChunkDuration>
                                                         <SegmentDuration>6</SegmentDuration>
+                                                        <SegmentCount>10</SegmentCount>
+                                                        <CrossDomains>
+                                                                <Url>*</Url>
+                                                        </CrossDomains>
                                                         <DVR>
-                                                            <Enable>false</Enable>
+                                                                <Enable>false</Enable>
+                                                                <TempStoragePath>/tmp/ome_dvr/</TempStoragePath>
+                                                                <MaxDuration>300</MaxDuration>
+                                                        </DVR>
+                                                        </LLHLS>
+                                                <HLS>
+                                                        <SegmentDuration>6</SegmentDuration>
+                                                        <SegmentCount>5</SegmentCount>
+                                                        <DVR>
+                                                                <Enable>false</Enable>
                                                                 <EventPlaylistType>false</EventPlaylistType>
                                                                 <TempStoragePath>/tmp/ome_dvr/</TempStoragePath>
                                                                 <MaxDuration>300</MaxDuration>
                                                         </DVR>
-                                                    <CrossDomains>
-                                                        <Url>*</Url>
-                                                    </CrossDomains>
+                                                        <CrossDomains>
+                                                                <Url>*</Url>
+                                                        </CrossDomains>
                                                 </HLS>
                                         </Publishers>
                                 </Application>
