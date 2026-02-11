@@ -169,7 +169,27 @@ EOF
     fi
 
     ###########################################################################
-    # STEP 6 — METADATA EXTRACTION FOR master.m3u8
+    # STEP 6 — EXTRACT AUDIO FOR ASR
+    ###########################################################################
+
+    if [[ -n "$HAS_AUDIO" ]]; then
+        WAV_FILE="$FINAL_DIR/$BASENAME.wav"
+        log "Extracting audio for ASR..."
+
+        ffmpeg -y -i "$MOVED_MP4" -vn -acodec pcm_s16le \
+            -ar 16000 -ac 1 -f wav "$WAV_FILE" >>"$LOG_FILE" 2>&1
+
+        if [[ $? -ne 0 ]]; then
+            log "WARNING: Audio extraction failed (continuing anyway)"
+        else
+            log "Audio extracted → $BASENAME.wav"
+        fi
+    else
+        log "Skipping audio extraction (no audio track detected)"
+    fi
+
+    ###########################################################################
+    # STEP 7 — METADATA EXTRACTION FOR master.m3u8
     ###########################################################################
 
     WIDTH=$(ffprobe -v error -select_streams v:0 -show_entries stream=width \
@@ -205,7 +225,7 @@ EOF
     log "master.m3u8 generated"
 
     ###########################################################################
-    # STEP 7 — UPLOAD TO S3 VIA RCLONE
+    # STEP 8 — UPLOAD TO S3 VIA RCLONE
     ###########################################################################
     sleep 10
     
@@ -230,7 +250,7 @@ EOF
     log "Upload finished"
 
     ###########################################################################
-    # STEP 8 — COMPLETE WEBHOOK CALLBACK
+    # STEP 9 — COMPLETE WEBHOOK CALLBACK
     ###########################################################################
 
 COMPLETE_PAYLOAD=$(cat <<EOF
@@ -261,7 +281,7 @@ EOF
     fi
 
     ###########################################################################
-    # STEP 9 — CLEANUP SOURCE + DESTINATION
+    # STEP 10 — CLEANUP SOURCE + DESTINATION
     ###########################################################################
     sleep 10
     log "Cleaning up local files..."
