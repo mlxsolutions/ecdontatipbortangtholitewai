@@ -157,11 +157,11 @@
                                                         <Timeout>30000</Timeout>
                                                         <Rtx>false</Rtx>
                                                         <Ulpfec>false</Ulpfec>
-                                                        <JitterBuffer>true</JitterBuffer>
+                                                        <JitterBuffer>false</JitterBuffer>
                                                         <CreateDefaultPlaylist>false</CreateDefaultPlaylist>
                                                 </WebRTC>
                                                 <LLHLS>
-                                                        <ChunkDuration>0.5</ChunkDuration>
+                                                        <ChunkDuration>0.2</ChunkDuration>
                                                         <SegmentDuration>6</SegmentDuration>
                                                         <SegmentCount>10</SegmentCount>
                                                         <CrossDomains>
