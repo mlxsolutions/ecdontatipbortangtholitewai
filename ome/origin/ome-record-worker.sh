@@ -1,6 +1,7 @@
 #!/bin/bash
 
 ### CONFIG ###################################################################
+
 SOURCE_DIR="$OME_DOCKER_HOME/rec"
 DEST_DIR="$OME_DOCKER_HOME/rec-done"
 
@@ -14,11 +15,15 @@ LOG_DIR="$OME_DOCKER_HOME/logs"
 LOG_FILE="$LOG_DIR/ome-record-worker.log"
 MAX_DAYS=7
 
-# RCLONE settings
+# Webhook callback env vars (export in /etc/environment or systemd service)
+MLAPI_CALLBACK="https://api.muselink.com/pre/ome/rec"
+MLAPI_KEY="MFMD8H2ECHKZ0CDVTUUYOVMQ1V0JBM9Y"
 
+# Rclone bandwidth throttle
 RCLONE_BWLIMIT="50M"
 BUCKET_NAME="vodstack-destination-1v3nwphy8f3az"
-RCLONE_BASE="mys3:$BUCKET_NAME"
+RCLONE_BASE="mys3:vodstack-destination-1v3nwphy8f3az"
+RCLONE_CONFIG="/home/ubuntu/.config/rclone/rclone.conf"
 
 mkdir -p "$DEST_DIR"
 mkdir -p "$LOG_DIR"
@@ -176,7 +181,7 @@ EOF
     ###########################################################################
 
     if [[ -n "$HAS_AUDIO" ]]; then
-        local WAV_FILE="$FINAL_DIR/$BASENAME.wav"
+        local WAV_FILE="$FINAL_DIR/OR.wav"
         log "Extracting audio for ASR..."
 
         ffmpeg -y -i "$MOVED_MP4" -vn -acodec pcm_s16le \
@@ -185,7 +190,7 @@ EOF
         if [[ $? -ne 0 ]]; then
             log "WARNING: Audio extraction failed (continuing anyway)"
         else
-            log "Audio extracted → $BASENAME.wav"
+            log "Audio extracted → OR.wav"
         fi
     else
         log "Skipping audio extraction (no audio track detected)"
